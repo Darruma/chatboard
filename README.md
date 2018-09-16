@@ -1,2 +1,2 @@
-# comments.js
-A co
+# comment.js
+A comment system built using express and mongoDB

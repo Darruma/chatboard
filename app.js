@@ -1,0 +1,12 @@
+const express = require('express');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const boilerplate = require('./routes/boilerplate');
+const accounts =require('./routes/accounts');
+const app = express();
+app.use('/',boilerplate);
+app.use('/',accounts);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(session({secret:"yeet",resave:false,saveUninitialized:true}));
+module.exports = app;

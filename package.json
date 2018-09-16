@@ -1,0 +1,27 @@
+{
+  "name": "comments",
+  "version": "1.0.0",
+  "description": "A comment system written in express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darruma/comment.js"
+  },
+  "author": "Darruma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Darruma/comment.js/issues"
+  },
+  "homepage": "https://github.com/Darruma/comment.js#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.2.15"
+  }
+}
