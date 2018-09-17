@@ -1,2 +1,2 @@
 # comment.js
-A comment system built using express and mongoDB
+A comment system built a MERN Stack
