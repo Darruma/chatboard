@@ -1,0 +1,53 @@
+.arrow {
+  background-size: 20px 27px;
+  width: 21px;
+  height: 27px;
+  display: inline-block;
+}
+div {
+    display: block;
+}
+.vote {
+    float: left;
+    text-align: left;
+    width: 30px;
+}
+.up {
+  background-image:url("./graphics/uparrow.jpg");
+ 
+}
+
+.down {
+  background-image: url("./graphics/downarrow.jpg");
+  
+}
+
+.upvoted {
+  background-image: url("./graphics/upvoted.jpg");
+
+}
+
+.downvoted {
+  background-image: url("./graphics/downvoted.jpg");
+}
+
+.score {
+    color: grey;
+    font-size: 26px;
+    margin: 4px;
+}
+
+.content {
+    color: black;
+    font-size: 28px;
+}
+
+.author {
+    margin: 0;
+    color: blue;
+    font-size: 24px
+}
+
+.comment {
+   padding-right: 4px;
+}
