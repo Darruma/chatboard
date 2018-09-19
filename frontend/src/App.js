@@ -4,9 +4,8 @@ import CommentBox from "./components/commentbox";
 import "./App.css";
 
 class App extends Component {
-  state = { data: [], textvalue: "" };
+  state = { data: [], textvalue: '' };
   render() {
-    console.log(this.state);
     return (
       <div className="App">
         {this.state.data.map((element, i) => {
@@ -26,7 +25,7 @@ class App extends Component {
         })}
         <CommentBox
           value={this.state.textvalue}
-          handleChange={this.handleCommentSubmit}
+          handleChange={this.handleCommentChange}
           handleSubmit={this.handleCommentSubmit}
         />
       </div>
@@ -56,13 +55,13 @@ class App extends Component {
     ];
     this.setState({ data: newState });
   }
-  handleCommentSubmit = e => {
-    event.preventDefault();
+  handleCommentSubmit = (e) => {
+    e.preventDefault();
   // Post comment data.
     this.setState({textvalue: '' });
   };
 
-  handleCommentChange = e => {
+  handleCommentChange = (e) => {
     this.setState({ textvalue: e.target.value });
   };
 }
