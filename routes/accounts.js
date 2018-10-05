@@ -100,18 +100,80 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/post', (req, res) => {
-	
+	const { user, loggedIn } = req.session;
+	const { body } = req;
+
+		if (!loggedIn) {
+			return res.send({
+				success: false,
+				message: 'User not logged in'
+			});
+		}
+
+		var comment = new Comment();
+		comment.author = user.username;
+		comment.content = body.content;
+		if(body.parent != null)
+		{
+
+			comment.content = body.content;
+			comment.type = 'child';
+			Post.findOneAndUpdate({_id:body.parentId},
+				{
+					$push: {
+						children: comment
+					}
+				},{
+					new: true
+				},(err, users) => {
+					if (err) {
+						return res.json({
+							success: false,
+							message: 'Server Error'
+						});
+					}
+				});
+		}
+		else {
+			comment.save((err,comment)=>{
+				if (err) {
+					return res.json({
+					success: false,
+				  message: 'Server Error'
+			});
+		}})
+		}
 });
 
 router.get('/posts/:page', (req, res) => {
-	
+	const { user, loggedIn } = req.session;
+
+		break;
+	Post.find({page:page},
+	(err,posts) =>
+		{
+			if(err)
+			return res.json({
+				success: false,
+				message: 'Server Error'
+			})
+
+		posts.foreach((element) =>
+		{
+			//Traverse trees and add vote values
+		}
+		})
+		}
+
+		)
+
 });
 router.get('/posts/latest/:page', (req, res) => {
-	
+
 });
 
 router.get('/post/score/:id', (req, res) => {
-	
+
 });
 router.post('/upvote', (req, res) => {
 	const { user, loggedIn } = req.session;
