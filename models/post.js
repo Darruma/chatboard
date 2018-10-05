@@ -10,6 +10,11 @@ var PostSchema = new mongoose.Schema({
 		type: String,
 		default: ""
 	},
+	type :
+	{
+	 	type:String,
+		default:"root"
+	},
 	score: {
 		type: Number,
 		default: 0
@@ -30,10 +35,12 @@ var PostSchema = new mongoose.Schema({
 	{
 		type:Date,
 		default:Date.now()
-	}
-
-
+	},
+	children:[PostSchema]
+	
 });
+
+
 
 
 module.exports = db.model("Post", PostSchema, "Posts");
