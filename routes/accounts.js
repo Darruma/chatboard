@@ -100,154 +100,18 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/post', (req, res) => {
-	const { body } = req;
-	const { loggedIn, user } = req.session;
-
-	var comment = new Post();
-
-	comment.content = body.content;
-	if (!loggedIn) {
-		comment.author = 'anon';
-	} else {
-		comment.author = user.username;
-	}
-
-	comment.save((err, comment) => {
-		if (err) {
-			return res.json({
-				success: false,
-				message: 'Server Error'
-			});
-		}
-		if (loggedIn) {
-			User.findOneAndUpdate(
-				{
-					_id: user._id
-				},
-				{
-					$push: {
-						comments: comment._id
-					}
-				},
-				{
-					new: true
-				},
-				(err, users) => {
-					if (err) {
-						return res.json({
-							success: false,
-							message: 'Server Error'
-						});
-					}
-				}
-			);
-		}
-		return res.json({
-			success: true,
-			message: comment
-		});
-	});
+	
 });
 
 router.get('/posts/:page', (req, res) => {
-	var this_page = req.params.page;
-	const { user, loggedIn } = req.session;
-	Post.find(
-		{
-			page: this_page
-		},
-		(err, posts) => {
-			if (posts.length > 1) {
-				return res.json({
-					success: false,
-					message: 'No posts found'
-				});
-			}
-			if (err) {
-				return res.json({
-					success: false,
-					message: 'Server Error'
-				});
-			}
-			if (loggedIn) {
-				return res.json({
-					success: true,
-					message: posts.map((element) => {
-						element = element.toObject();
-						if (contains(element.upvotes, user._id)) {
-							element.vote = 1;
-						} else if (contains(element.downvotes, user._id)) {
-							element.vote = -1;
-						} else {
-							element.vote = 0;
-						}
-						return element;
-					})
-				});
-			}
-			return res.json({
-				success: true,
-				message: posts
-			});
-		}
-	);
+	
 });
 router.get('/posts/latest/:page', (req, res) => {
-	Post.find(
-		{
-			page: req.params.page
-		},
-		(err, posts) => {
-			if (err) {
-				return res.json({
-					success: false,
-					message: 'Server Error'
-				});
-			}
-			const latestPost = posts[posts.length - 1];
-			if (posts.length == 0) {
-				return res.json({
-					success: false,
-					message: 'No comments'
-				});
-			}
-			return res.json({
-				success: true,
-				message: latestPost
-			});
-		}
-	);
+	
 });
 
 router.get('/post/score/:id', (req, res) => {
-	const { user, loggedIn } = req.session;
-	const { id } = req.params;
-	if (!loggedIn) {
-		return res.json({
-			success: false,
-			message: 'User not logged in'
-		});
-	}
-	Post.find(
-		{
-			_id: id
-		},
-		(err, posts) => {
-			var vote;
-			if (contains(posts[0].upvotes, user._id)) {
-				vote = 1;
-			} else if (contains(posts[0].downvotes, user._id)) {
-				vote = -1;
-			} else {
-				vote = 0;
-			}
-			return res.json({
-				success: true,
-				score: posts[0].score,
-				vote: vote
-			});
-		}
-	);
+	
 });
 router.post('/upvote', (req, res) => {
 	const { user, loggedIn } = req.session;
